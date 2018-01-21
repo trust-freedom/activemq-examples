@@ -1,4 +1,4 @@
-package com.freedom.helloworld;
+package com.freedom.activemq.helloworld;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 

@@ -1,4 +1,4 @@
-package com.freedom.helloworld;
+package com.freedom.activemq.helloworld;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -16,7 +16,7 @@ public class Sender {
         //第一步：建立ConnectionFactory工厂对象，需要填入用户名、密码、以及要连接的地址，均使用默认即可，默认端口号为"tcp://localhost:61616"
         ConnectionFactory ConnectionFactory = new ActiveMQConnectionFactory(
                 ActiveMQConnectionFactory.DEFAULT_USER,
-                ActiveMQConnectionFactory.DEFAULT_PASSWORD,
+                ActiveMQConnectionFactory.DEFAULT_PASSWORD,      //默认用户名，密码为null
                 "tcp://localhost:61616");
 
         //第二步：通过ConnectionFactory工厂建立Connection连接，并且调用Connection的start()方法开启连接，Connection默认是关闭的
@@ -40,6 +40,7 @@ public class Sender {
 
         //第六步：可以使用MessageProducer的setDeliveryMode()方法为其设置持久化特性和非持久化特性（DeliveryMode）
         producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT); //可以针对单个生产者设置是否持久化
+                                                                 //非持久化在MQ重启后消息丢失，但queue1队列还存在
 
         //第七步：最后通过Session创建JMS规范中TextMessage形式的数据，并用MessageProducer的send()方法发送数据
         //        同理，使用receive()方法接收数据
